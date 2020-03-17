@@ -7,13 +7,15 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
   <title>Scraper</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-  <h1>Hello World!</h1>
-  We are using Node.js <span id="node-version"></span>,
-  Chromium <span id="chrome-version"></span>,
-  and Electron <span id="electron-version"></span>.
+  <h1>Web Scraper</h1>
+  <form id="urlform">
+    <input type="url" placeholder="Enter Url" name="url" id="urlfield" value="http://google.com">
+    <button type="submit" id="button">Scrape Now</button>
+  </form>
 
   <!-- You can also require other files to run in this process -->
   <script src="./renderer.js"></script>
