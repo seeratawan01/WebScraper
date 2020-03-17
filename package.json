@@ -6,13 +6,13 @@
   "scripts": {
     "start": "nodemon --watch * --exec \"electron .\""
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/Xuntron/WebScraper",
   "keywords": [
     "Electron",
-    "quick",
-    "start"
+    "scrap",
+    "python"
   ],
-  "author": "GitHub",
+  "author": "Seerat Awan",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^8.1.1"
