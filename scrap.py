@@ -5,6 +5,7 @@ import tldextract
 import sys
 
 url = sys.argv[1]
+dirc = sys.argv[2]
 
 headers = requests.utils.default_headers()
 headers.update({
@@ -38,8 +39,8 @@ for link in other_links:
             link['src'] = url+'/'+link['src']
 
 name = tldextract.extract(url)
-f = open(name.domain+".html", "w", encoding="utf-8")
+f = open(dirc+'\\'+name.domain+".html", "w", encoding="utf-8")
 f.write(soup.prettify())
 f.close()
 
-print(name.domain+".html")
+print(dirc+'\\'+name.domain+".html")

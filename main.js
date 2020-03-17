@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const path = require('path')
 
 // To Run Python Script
@@ -25,13 +25,41 @@ function createWindow() {
 }
 
 ipcMain.on('url', (event, url) => {
-  letScrap(url, (msg) => {
 
-    console.log(msg)
-    event.reply('message', msg)
-  })
+  getDirectory(url, event);
+
 })
 
+
+const getDirectory = (url, event) => {
+  const mainWindow = BrowserWindow.getAllWindows()[0];
+
+  dialog.showOpenDialog(mainWindow, {
+    properties: ['openDirectory']
+  }).then(result => {
+    if (result.filePaths.length > 0) {
+      let dir = result.filePaths[0];
+
+      letScrap(url, dir, (msg) => {
+
+        console.log(msg)
+
+        dialog.showMessageBoxSync(mainWindow, {
+          type: 'info',
+          buttons: ['Cancel'],
+          title: "File Scraped Successfully",
+          message: 'Scraped file location:' + msg
+        })
+
+        event.reply('message', msg)
+      })
+
+    }
+  }).catch(err => {
+    console.log(err)
+  })
+
+}
 
 
 app.whenReady().then(createWindow)
@@ -48,9 +76,9 @@ app.on('activate', function () {
 
 // Python Communication
 
-const letScrap = (url, cb) => {
+const letScrap = (url, dir, cb) => {
 
-  var py = spawn('python', ["scrap.py", url]);
+  var py = spawn('python', ["scrap.py", url, dir]);
 
   let dataString = '';
 
