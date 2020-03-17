@@ -14,4 +14,7 @@ document.getElementById("urlform").addEventListener("submit", (e) => {
     ipcRenderer.send('url', url)
 });
 
+ipcRenderer.on('message', (event, arg) => {
+    console.log(arg)
+})
 

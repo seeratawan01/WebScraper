@@ -2,7 +2,9 @@ from bs4 import BeautifulSoup
 import requests
 import tldextract
 
-url = "https://goprogs.com/"
+import sys
+
+url = sys.argv[1]
 
 headers = requests.utils.default_headers()
 headers.update({
@@ -39,3 +41,5 @@ name = tldextract.extract(url)
 f = open(name.domain+".html", "w", encoding="utf-8")
 f.write(soup.prettify())
 f.close()
+
+print(name.domain+".html")
